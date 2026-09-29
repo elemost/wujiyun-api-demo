@@ -1,0 +1,38 @@
+# 流程审批意见接口
+
+说明：对流程数据添加审批意见  
+接口地址：/develop/document/workflow/comment  
+请求类型：post
+
+## 请求参数
+
+| 参数名称         | 参数类型    | 参数说明             | 备注            |
+|--------------|---------|------------------|---------------|
+| appKey       | varchar | 密钥key            |
+| nonce        | varchar | 随机加密字符串          |
+| timestamp    | varchar | 时间戳 精确到秒         |
+| msgEncrypt   | varchar | 加密后参数（json字符串）   | 流程参数加密后得到的字符串 |
+| msgSignature | varchar | 签名               |
+| dataCreator  | varchar | 数据创建人（对应创建人的手机号） |
+
+### msgEncrypt 加密前参数
+
+| 参数名称          | 参数类型    | 参数说明     | 备注 |
+|---------------|---------|----------|----|
+| applicationId | varchar | 应用id     |
+| formId        | varchar | 表单id     |
+| uuid          | varchar | 表单数据uuid |
+
+## 返回参数
+
+| 参数名称               | 参数类型    | 参数说明                       |
+|--------------------|---------|----------------------------|
+| code               | varchar | 当code等于0000表示接口请求成功，其他则为失败 |
+| message            | varchar | 描述                         |
+| data               | Array   | 返回的数据放在里面                  |
+| data[].operate     | varchar | 操作类型                       |
+| data[].operateName | varchar | 操作类型名称                     |
+| data[].creator     | varchar | 创建人                        |
+| data[].creatorName | varchar | 创建人名称                      |
+| data[].duration    | varchar | 耗时                         |
+| data[].comment     | varchar | 评论                         |
